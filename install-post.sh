@@ -496,17 +496,18 @@ if [ "$XS_MOTD" == "yes" ] ; then
 ## Pretty MOTD BANNER
   if ! grep -q https "/etc/motd" ; then
     cat << 'EOF' > /etc/motd.new
-	   This system is one of hosting node for
-	 _    _                                       _    _____           _                 
- 	| |  | |                                     (_)  / ____|         | |                
-	| |__| | __ _ _ __ _   _ _ __ ___   __ _ _ __ _  | (___  _   _ ___| |_ ___ _ __ ___  
- 	|  __  |/ _` | '__| | | | '_ ` _ \ / _` | '__| |  \___ \| | | / __| __/ _ \ '_ ` _ \ 
- 	| |  | | (_| | |  | |_| | | | | | | (_| | |  | |  ____) | |_| \__ \ ||  __/ | | | | |
- 	|_|  |_|\__,_|_|   \__,_|_| |_| |_|\__,_|_|  |_| |_____/ \__, |___/\__\___|_| |_| |_|
-                                                           __/ |                      
-                                                          |___/                       
-
-
+	   This system is one of hosting node by:         
+ .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+| |  ____  ____  | || |      __      | || |  _______     | || | _____  _____ | || | ____    ____ | || |     _____    | |
+| | |_   ||   _| | || |     /  \     | || | |_   __ \    | || ||_   _||_   _|| || ||_   \  /   _|| || |    |_   _|   | |
+| |   | |__| |   | || |    / /\ \    | || |   | |__) |   | || |  | |    | |  | || |  |   \/   |  | || |      | |     | |
+| |   |  __  |   | || |   / ____ \   | || |   |  __ /    | || |  | '    ' |  | || |  | |\  /| |  | || |      | |     | |
+| |  _| |  | |_  | || | _/ /    \ \_ | || |  _| |  \ \_  | || |   \ `--' /   | || | _| |_\/_| |_ | || |     _| |_    | |
+| | |____||____| | || ||____|  |____|| || | |____| |___| | || |    `.__.'    | || ||_____||_____|| || |    |_____|   | |
+| |              | || |              | || |              | || |              | || |              | || |              | |
+| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
+ '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' 
 EOF
 
     cat /etc/motd >> /etc/motd.new
@@ -518,7 +519,6 @@ if [ "$XS_LIMITS" == "yes" ] ; then
     ## Increase max user watches
     # BUG FIX : No space left on device
     cat <<EOF > /etc/sysctl.d/99-xs-maxwatches.conf
-# eXtremeSHOK.com
 # Increase max user watches
 fs.inotify.max_user_watches=1048576
 fs.inotify.max_user_instances=1048576
@@ -526,7 +526,6 @@ fs.inotify.max_queued_events=1048576
 EOF
     ## Increase max FD limit / ulimit
     cat <<EOF >> /etc/security/limits.d/99-xs-limits.conf
-# eXtremeSHOK.com
 # Increase max FD limit / ulimit
 * soft     nproc          256000
 * hard     nproc          256000
@@ -539,7 +538,6 @@ root hard     nofile         256000
 EOF
     ## Increase kernel max Key limit
     cat <<EOF > /etc/sysctl.d/99-xs-maxkeys.conf
-# eXtremeSHOK.com
 # Increase kernel max Key limit
 kernel.keys.root_maxkeys=1000000
 kernel.keys.maxkeys=1000000
@@ -558,7 +556,6 @@ fi
 if [ "$XS_LOGROTATE" == "yes" ] ; then
     ## Optimise logrotate
     cat <<EOF > /etc/logrotate.conf
-# eXtremeSHOK.com
 daily
 su root adm
 rotate 7
@@ -576,7 +573,6 @@ fi
 if [ "$XS_JOURNALD" == "yes" ] ; then
     ## Limit the size and optimise journald
     cat <<EOF > /etc/systemd/journald.conf
-# eXtremeSHOK.com
 [Journal]
 # Store on disk
 Storage=persistent
